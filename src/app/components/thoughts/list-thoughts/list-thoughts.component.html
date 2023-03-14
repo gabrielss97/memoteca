@@ -1,0 +1,30 @@
+<!-- CARREGAMENTO  -->
+<ng-container *ngIf="isLoading">
+  <h2 class="ff-inter init-dialog">Carregando...</h2>
+</ng-container>
+
+<!-- LISTAGEM DE PENSAMENTOS  -->
+<section class="container" *ngIf="thoughts">
+  <header class="header d-flex">
+    <h2 class="ff-inter">Meu Mural</h2>
+
+    <button class="botao" routerLink="/newThought">Adicionar pensamento</button>
+  </header>
+  <div class="mural" *ngIf="thoughts.length > 0; else zeroThoughts">
+    <ng-container *ngFor="let thought of thoughts">
+      <app-thought [thought]="thought"></app-thought>
+    </ng-container>
+  </div>
+
+  <!-- MENSAGEM CASO A LISTA DE PENSAMENTOS ESTEJA VAZIA -->
+  <ng-template #zeroThoughts>
+    <h2 class="ff-inter">Nenhum pensamento encontrado</h2>
+  </ng-template>
+</section>
+
+<!-- MENSAGEM DE ERRO -->
+<ng-container *ngIf="errorMessage">
+  <h2 class="ff-inter init-dialog">
+    Infelizmente ocorreu um erro, tente novamente mais tarde
+  </h2>
+</ng-container>
